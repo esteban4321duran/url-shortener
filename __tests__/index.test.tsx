@@ -24,6 +24,12 @@ describe("rendering", () => {
         const urlForm = selectOriginalUrlInput();
         expect(urlForm).toBeInTheDocument();
     });
+    it("renders a copy button", () => {
+        const copyButton = screen.getByRole("button", {
+            name: "copy",
+        });
+        expect(copyButton).toBeInTheDocument();
+    });
 });
 
 describe("behaviour", () => {

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import URLForm from "@/components/URLForm";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const Home: React.FC = () => {
     //TODO declare types for these states
@@ -26,7 +27,6 @@ const Home: React.FC = () => {
                 body: JSON.stringify({ originalUrl: inputValues.originalUrl }),
             });
             const responseData = await response.json();
-            console.log(responseData);
             setShortenedUrl(responseData.shortenedUrl);
             setSubmitForm(false);
         }
@@ -45,10 +45,25 @@ const Home: React.FC = () => {
             </header>
             <main className="flex flex-col space-y-8 ">
                 <URLForm submitHandler={handleSubmit} />
-                <label className="shadow-lg p-4 bg-slate-100 w-full max-w-lg  flex justify-center space-x-4">
-                    <span>Shortened URL:</span>
-                    <input type="text" value={shortenedUrl} readOnly />
-                </label>
+                <div className="shadow-lg p-4 bg-slate-100 w-full max-w-lg  flex justify-center space-x-4">
+                    <label className="">
+                        <span>Shortened URL:</span>
+                        <input type="text" value={shortenedUrl} readOnly />
+                    </label>
+                    <button
+                        aria-label="copy"
+                        onClick={() => {
+                            navigator.clipboard.writeText(shortenedUrl);
+                        }}
+                    >
+                        <Image
+                            src="/images/copy.png"
+                            alt="copy button"
+                            width={25}
+                            height={25}
+                        />
+                    </button>
+                </div>
             </main>
         </>
     );

@@ -15,6 +15,12 @@ describe("rendering", () => {
         expect(originalUrlInput).toBeInTheDocument();
         expect(submitButton).toBeInTheDocument();
     });
+    it("renders a paste button", () => {
+        const pasteButton = screen.getByRole("button", {
+            name: "paste",
+        });
+        expect(pasteButton).toBeInTheDocument();
+    });
 });
 
 describe("validation", () => {
@@ -59,6 +65,24 @@ describe("validation", () => {
         expect(originalUrlInput).toBeInvalid();
         expect(originalUrlInput).toHaveErrorMessage(/the url is too long/i);
     }, 60000);
+});
+
+describe.skip("behaviour", () => {
+    it("paste button pastes clipboard's content to input", async () => {
+        const originalUrlValue = "http://www.example.com";
+
+        navigator.clipboard.writeText = jest.fn(
+            () => Promise<void>
+        ) as jest.Mock;
+
+        await navigator.clipboard.writeText(originalUrlValue);
+        const pasteButton = screen.getByRole("button", {
+            name: "paste",
+        });
+        await user.click(pasteButton);
+        const originalUrlInput = selectOriginalUrlInput();
+        expect(originalUrlInput.value).toBe(originalUrlValue);
+    });
 });
 
 function renderUrlForm() {

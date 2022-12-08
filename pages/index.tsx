@@ -42,7 +42,6 @@ const Home: React.FC = () => {
                 <h1 className="font-semibold text-6xl">
                     Esteban's URL shortener
                 </h1>
-                ;
             </header>
             <main className="flex flex-col space-y-8 ">
                 <URLForm submitHandler={handleSubmit} />

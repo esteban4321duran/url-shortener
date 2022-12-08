@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface propsInterface {
     submitHandler: (inputValues: { originalUrl: string }) => void;
@@ -42,12 +43,29 @@ const URLForm: React.FC<propsInterface> = ({ submitHandler }) => {
                     onChange={(event: React.FormEvent<HTMLInputElement>) => {
                         setOriginalUrl(event.currentTarget.value);
                     }}
+                    value={originalUrl}
                     aria-invalid={invalidUrl ? "true" : "false"}
-                    aria-errormessage="originalIdError"
+                    aria-errormessage="originalUrlError"
                 />
+                <button
+                    aria-label="paste"
+                    onClick={async () => {
+                        const clipboardText =
+                            await navigator.clipboard.readText();
+
+                        setOriginalUrl(clipboardText.trim());
+                    }}
+                >
+                    <Image
+                        src="/images/paste.png"
+                        width={25}
+                        height={25}
+                        alt="paste button"
+                    />
+                </button>
             </label>
             {invalidUrl && (
-                <span id="originalIdError" className="text-red-600">
+                <span id="originalUrlError" className="text-red-600">
                     {originalUrlMessage}
                 </span>
             )}

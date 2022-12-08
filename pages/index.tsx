@@ -1,7 +1,7 @@
 import Head from "next/head";
-import styles from "@/pages/index.module.css";
 import URLForm from "@/components/URLForm";
 import { useState, useEffect } from "react";
+
 const Home: React.FC = () => {
     //TODO declare types for these states
     const [inputValues, setInputValues] = useState<any>({});

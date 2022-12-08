@@ -4,7 +4,7 @@ import connectionPool from "../config/db";
 import idHasher from "../config/hashIds";
 import { RowDataPacket } from "mysql2";
 import { useRouter } from "next/router";
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/Spinner";
 import Head from "next/head";
 
 interface PropsInterface {

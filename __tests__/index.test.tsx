@@ -33,7 +33,7 @@ describe("behaviour", () => {
             Promise.resolve({
                 json: () =>
                     Promise.resolve({
-                        originalUrl: "localhost/3Bhi",
+                        shortenedUrl: "localhost/3Bhi",
                     }),
             })
         ) as jest.Mock;
